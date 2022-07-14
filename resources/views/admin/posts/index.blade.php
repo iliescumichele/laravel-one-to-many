@@ -57,21 +57,29 @@
     {{ $posts->links() }}
 
 
-    <h2 class="mt-5">Elenco POST divisi per categorie</h2>
-    <div class="row row-cols-6 my-3">
+    <div class="elenco-posts">
+        <h2 class="mt-5">Elenco POST divisi per categorie</h2>
+        <div class="row row-cols-6 my-3">
 
-        @foreach ($categories as $category)
-            <div class="col my-2">
-                <h3 class="py-3">{{ $category->name }}</h3>
-                <ul>
+            @foreach ($categories as $category)
+                <div class="col my-2">
+                    <h3 class="py-3">{{ $category->name }}</h3>
+                    <ul>
 
-                    @foreach ($category->posts as $post)
-                        <li><a href="{{ route('admin.posts.show', $post) }}">{{ $post->title }}</a></li>
-                    @endforeach
+                        @foreach ($category->posts as $post)
+                            <li><a href="{{ route('admin.posts.show', $post) }}">{{ $post->title }}</a></li>
+                        @endforeach
 
-                </ul>
-            </div>
-        @endforeach
+                        @forelse ($category->posts as $post)
+                            <li><a href="{{ route('admin.posts.show', $post) }}">{{ $post->title }}</a></li>
+                        @empty
+                            <li>Non ci sono posto per questa categoria</li>
+                        @endforelse
+
+                    </ul>
+                </div>
+            @endforeach
+        </div>
     </div>
       
 </div>
