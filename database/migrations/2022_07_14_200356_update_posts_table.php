@@ -15,15 +15,12 @@ class UpdatePostsTable extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             
-            //creazion colonna FK key
-            $table -> unsignedBigInteger('category_id')->nullable()->after('id');
- 
-            $table -> foreign('category_id')
+            $table->unsignedBigInteger('category_id')->nullable()->after('id');
+
+            $table->foreign('category_id')
                 ->references('id')
                 ->on('categories')
-                ->onDelete('set null')
-                //->onDelete('cascade') con cascade vengono eliminati tutti i post con quella category
-            ;
+                ->onDelete('set null');
         });
     }
 
@@ -35,11 +32,8 @@ class UpdatePostsTable extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-
-            //eliminazione della FK
-            $table ->dropForeign('[category_id]');
-            //eliminazione colonna
-            $table ->dropColumn('category_id');
+            $table->dropForeign(['category_id']);
+            $table->dropColumn('category_id');
         });
     }
 }

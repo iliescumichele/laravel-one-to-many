@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use App\Post;
 use App\Category;
+use App\Post;
+use Illuminate\Database\Seeder;
 
 class UpdatePostsSeeder extends Seeder
 {
@@ -14,10 +14,9 @@ class UpdatePostsSeeder extends Seeder
     public function run()
     {
         $posts = Post::all();
-
         foreach ($posts as $post) {
             $category_id = Category::inRandomOrder()->first()->id;
-            $post->$category_id = $category_id;
+            $post->category_id = $category_id;
             $post->update();
         }
     }
