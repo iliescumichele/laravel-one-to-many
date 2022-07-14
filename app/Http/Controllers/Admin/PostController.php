@@ -73,11 +73,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(POST $post)
     {
-        $item = Post::find($id);
-        if($item){
-            return view('admin.posts.edit', compact('item'));
+        
+        $categories = Category::all();
+        if($post){
+            return view('admin.posts.edit', compact('post', 'categories'));
         }
         abort(404, 'Prodotto non presente');
     }
