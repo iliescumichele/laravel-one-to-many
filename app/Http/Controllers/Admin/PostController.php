@@ -7,6 +7,7 @@ use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Post;
+use App\Category;
 
 class PostController extends Controller
 {
@@ -18,7 +19,8 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('id', 'desc')->paginate(10);
-        return view( 'admin.posts.index', compact('posts') );
+        $categories = Category::all();
+        return view( 'admin.posts.index', compact('posts', 'categories') );
     }
 
     /**

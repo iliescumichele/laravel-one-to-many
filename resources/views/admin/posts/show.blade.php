@@ -10,8 +10,22 @@
         <a class="btn btn-warning mt-3 mb-5" href="{{ route('admin.posts.edit', $item) }}">EDIT</a>
     </div>
 
+    @if ( $item->category)
+
+        <div class="category-title">
+            <h3>Categoria: <strong>{{ $item->category->name}}</strong></h3>
+        </div>
+
+        @else
+
+        <div class="category-title">
+            <h3>Categoria: <strong>nessuna</strong></h3>
+        </div>
+
+    @endif
+
     <div class="d-flex justify-content-center my-5">
-        <div class="text-center p-3" style="background-color: rgb(150, 204, 252); width:50%;">
+        <div class="text-center p-3" style="background-color: rgb(170, 214, 252); width:60%;">
             <h3 class="mb-5" style="text-decoration: underline">{{ $item->title}}</h3>
             <p>{{ $item->content }}</p>
         </div>
